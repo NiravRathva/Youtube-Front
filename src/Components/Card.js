@@ -43,6 +43,7 @@ color: ${({ theme }) => theme.text};
 
 const ChannelName = styled.h3`
 font-size: 15px;
+color: ${({ theme }) => theme.text};
 //  margin: ${(props) => props.type === "small" ?"0px" :"8px 0px"};
 
 color: ${({ theme }) => theme.textsoft};

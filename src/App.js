@@ -12,27 +12,41 @@ import SignIn from './Pages/SignIn';
 
 
 const Container = styled.div`
-display:flex;
+
 `;
 const Main = styled.div`
 flex:10;
+
+
+display:flex;
  background-color:${({ theme }) => theme.bg}
 `;
+const Nav=styled.div`position: sticky;
+overflow: hidden;
+`;
+
 const Wrapper = styled.div`
+flex:10;
+
 padding:10px 10px`;
 
 function App() {
-
-  const [darkmode, setdarkmode] = useState(false)
+  
+  const [darkmode, setdarkmode] = useState(true)
+  
   return (
     <>
       <ThemeProvider theme={darkmode ? darkTheme : lightTheme}>
         <Container>
           <Router>
-            <Menu darkmode={darkmode} setdarkmode={setdarkmode} />
+
+            
+            <Nav> 
+               <Navbar/>
+               </Nav>
 
             <Main>
-              <Navbar />
+            <Menu type="hide" darkmode={darkmode} setdarkmode={setdarkmode} />
               <Wrapper>
                 <Routes>
                   <Route path="/">
@@ -41,9 +55,11 @@ function App() {
                     <Route path='sub' element={<Home type="sub"/>} />
                     <Route path="signin" element={<SignIn />} />
 
+                    
+                  </Route>
+                  <Route path="video">
                     <Route path=":id" element={<Video />} />
                   </Route>
-
                 </Routes>
               </Wrapper>
             </Main>
