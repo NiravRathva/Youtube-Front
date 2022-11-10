@@ -64,15 +64,16 @@ const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
   const handleLogIn = async (e) => {
     e.preventDefault();
     try {
       dispatch(loginStart())
-    const res = await axios.post("auth/signin", { name, password })
-    dispatch(loginSuccess(res.data))
-    console.log(res)
+      const res = await axios.post("auth/signin", { name, password })
+      dispatch(loginSuccess(res.data))  
+      
+      
     } catch (error) {
       dispatch(loginFailure())
     }

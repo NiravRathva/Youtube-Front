@@ -8,13 +8,14 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import Comments from "../Components/Comments";
 import Card from "../Components/Card";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch ,useSelector} from "react-redux";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { subscription } from "../Redux/UserSlice";
 import { dislike, fetchSuccess, like } from "../Redux/videoSlice";
 import { format } from "timeago.js";
+import Recommandation from "../Components/Recommandation";
 
 const Container = styled.div`
 display: flex;
@@ -91,6 +92,7 @@ const Description = styled.p`
 `;
 const Subscribe = styled.button`
   background-color: #cc1a00;
+
   font-weight: 500;
   color: white;
   border: none;
@@ -101,9 +103,9 @@ const Subscribe = styled.button`
   margin-top:5px;
 `;
 const VideoFrame = styled.video`
-  max-height: 720px;
+  max-height: 430px;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 const Video = () => {
@@ -137,7 +139,7 @@ const Video = () => {
  };
 
  const handleSub = async () => {
-  currentUser.subscribeduser.includes(channel._id)
+  user.subscribeduser.includes(channel._id)
     ? await axios.put(`/users/unsub/${channel._id}`)
     : await axios.put(`/users/sub/${channel._id}`);
   dispatch(subscription(channel._id));
@@ -146,7 +148,7 @@ const Video = () => {
     <Container>
       <MainContent>
         <VideoWrapper>
-          <VideoFrame src="" controls />
+          <VideoFrame src={currentVideo.videoUrl} controls />
         </VideoWrapper>
        
         <Title>{currentVideo.title}</Title>
@@ -184,22 +186,14 @@ const Video = () => {
           </ChannelInfo>
           <Subscribe onClick={handleSub}>
             {user.subscribeduser?.includes(channel._id)
-              ? "SUBSCRIBED"
+              ? "SUBSCRIBED" 
               : "SUBSCRIBE"}
           </Subscribe>
         </Channel>
         <Hr />
         <Comments videoId={currentVideo._id}/>
       </MainContent>
-      {/* <Recommendation>
-
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-        <Card type="small" />
-      </Recommendation> */}
+      <Recommandation tags={currentVideo.tag}/>
     </Container>
   )
 }

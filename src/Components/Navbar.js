@@ -4,10 +4,11 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import VideoCallOutlinedIcon from "@mui/icons-material/VideoCallOutlined";
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import logo from "../Static/Images/Youtube.png";
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { useState } from 'react';
 import { Popup } from './Popup';
+
 
 
 
@@ -58,9 +59,7 @@ color:#3ea6ff;
 border-radius:5px;
 font-weight:bold;
 margin-right: 20px;
-
 position: absolute;
-
 right:0px;
 top:10px;
     gap: 5px;
@@ -103,9 +102,10 @@ const Img = styled.img.attrs({
 width: 25px;
 height: 30px;
 `;
-const Navbar = ({hide}) => {
-  const [open, setOpen] = useState(false)
+const Navbar = ({hide,open,setOpen}) => {
+  const [Query, setQuery] = useState("");
   const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate()
   const hamburger=()=>{
     let menu=document.getElementById("items");
     if (menu.style.display === "block") {
@@ -125,8 +125,8 @@ const Navbar = ({hide}) => {
           </Logo>
         </Link>
         <Search>
-          <Input placeholder="search" />
-          <SearchOutlinedIcon />
+          <Input placeholder="search"   onChange={(e) => setQuery(e.target.value)}/>
+          <SearchOutlinedIcon onClick={()=>navigate(`/search?q=${Query}`)}/>
         </Search>
         {user ? (<User>
           <VideoCallOutlinedIcon onClick={() => setOpen(true)} />
@@ -141,7 +141,7 @@ const Navbar = ({hide}) => {
         )}
       </Wrapper>
     </Container >
-    {open && <Popup setOpen={setOpen} />}
+    {/* {open && <Popup setOpen={setOpen} />} */}
   </>
   )
 }

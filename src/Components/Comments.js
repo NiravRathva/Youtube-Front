@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 import Comment from './Comment';
@@ -11,6 +10,14 @@ display: flex;
 align-items: center;
 gap:10px;
 `;
+// const Button = styled.div`
+// background-color:rgb(62,166,255);
+// display: flex;
+// padding: 10px 15px;
+// border-radius:10px ;cursor: pointer;
+// color: ${({ theme }) => theme.text};
+// border: none;
+// `;
 const ChannelLogo = styled.img` 
 width: 40px;
 height:40px;
@@ -34,6 +41,7 @@ const Comments = ({videoId}) => {
     const fetchcomments = async () => {
       try {
         const response = await axios.get(`/comments/${videoId}`);
+    
         setcomments(response.data)
       } catch (error) {
 
@@ -42,17 +50,22 @@ const Comments = ({videoId}) => {
     fetchcomments();
   }, [videoId])
 
+
+
+
+ 
   return (
     <Container>
       <NewComment>
-        <ChannelLogo src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo" />
+        <ChannelLogo src={user.img} />
         <Input placeholder='Add new comment' />
+        
       </NewComment>
-      {comments.map((comment)=>(
-      <Comment key={comment._id} comment={comment}/>
+      {comments.map((comment) => (
+        <Comment key={comment._id} comment={comment} />
       ))}
-      
-      
+
+
 
     </Container>)
 }
