@@ -20,7 +20,6 @@ const Main = styled.div`
 flex:10;
 
 
-
 display:flex;
  background-color:${({ theme }) => theme.bg}
 `;
@@ -31,7 +30,7 @@ overflow: hidden;
 const Wrapper = styled.div`
 flex:10;
 
-padding:10px 10px`;
+`;
 
 function App() {
   const [open, setOpen] = useState(false)
@@ -44,9 +43,9 @@ function App() {
           <Router>
 
 
-            <Nav>
+          <Nav>
               <Navbar open={open} setOpen={setOpen} />
-            </Nav>
+              </Nav>
 
             <Main open={open} setOpen={setOpen}>
               <Menu type="hide" darkmode={darkmode} setdarkmode={setdarkmode} />
@@ -54,10 +53,10 @@ function App() {
                 <Routes>
                   <Route path="/">
                     <Route index element={<Home type="random" />} />
-                    <Route path='trending' element={<Home type="trending" />} />
                     <Route path='sub' element={<Home type="sub" />} />
                     <Route path="search" element={<Search />} />
                     <Route path="signin" element={<SignIn />} />
+                    <Route path='trending' element={<Home type="trending" />} />
 
 
                   </Route>

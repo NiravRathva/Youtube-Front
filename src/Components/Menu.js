@@ -30,9 +30,8 @@ flex:2;
    height:fit-content;
    color:${({ theme }) => theme.text};
    font-size:14px;
-     position: sticky;
-top: 12px;
-
+   position: sticky;
+   top: 12px;
 margin-left:0px;
 
 
@@ -52,7 +51,10 @@ cursor:pointer;
 font:size:20px;
 font-weight:bold;
 
-padding:8px;
+padding:8px;  
+&:hover {
+    background-color: ${({ theme }) => theme.soft};
+  }
 
 `;
 const Hr = styled.div`
@@ -86,20 +88,20 @@ margin-left: 10px;
 `;
 
 const Menu = ({ darkmode, setdarkmode }) => {
-    const dispatch=useDispatch();
-    const handlelogout=()=>{
+    const dispatch = useDispatch();
+    const handlelogout = () => {
         dispatch(logout())
     }
-  
-   
-   
+
+
+
     const { user } = useSelector((state) => state.user);
     return (
 
         <Container>
 
             <Wrapper id="items">
-                
+
                 <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
                     <Item>
                         <HomeOutlinedIcon />
@@ -178,13 +180,13 @@ const Menu = ({ darkmode, setdarkmode }) => {
                     Help
                 </Item>
                 <Item onClick={() => setdarkmode(!darkmode)}>
-                    {darkmode?<LightModeOutlinedIcon/>:<DarkModeOutlinedIcon/>}
-                    {darkmode?"Lightmode":"Darkmode"}
+                    {darkmode ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
+                    {darkmode ? "Lightmode" : "Darkmode"}
                 </Item>
                 <Item onClick={handlelogout}>
-                  { user &&<><LogoutOutlinedIcon/>
-                     logout
-                     </>}
+                    {user && <><LogoutOutlinedIcon />
+                        logout
+                    </>}
                 </Item>
             </Wrapper>
         </Container>

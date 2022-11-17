@@ -118,7 +118,7 @@ const Video = () => {
     const fetchData = async () => {
       try {
         const videoRes = await axios.get(`/videos/find/${path}`);
-    
+ 
         const channelRes = await axios.get(
           `/users/find/${videoRes.data.userId}`
         );
